@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <title>Vue Test</title>
+  </head>
+  <body>
+    <main id="app">
+      <h2>{{message}}</h2>
+      <p>{{message.length}}</p>
+      <button @click="clickMe">Click Me</button>
+    </main>
+
+    <script>
+      const app = Vue.createApp({
+        data() {
+          return {
+            message: "Hello VueJS",
+          };
+        },
+        methods: {
+          clickMe() {
+            this.message = "I LOVE VUEJS";
+          },
+          // count the number of characters in the message
+          countText() {
+            return this.message.length;
+          },
+        },
+      });
+      // Mount the app to the DOM
+      app.mount("#app");
+    </script>
+  </body>
+</html>
