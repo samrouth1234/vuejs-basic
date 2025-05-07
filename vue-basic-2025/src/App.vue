@@ -1,5 +1,6 @@
 <script setup>
 import { ref, onMounted } from "vue";
+import NavBar from "./components/nav/NavBar.vue";
 
 const name = ref("Vue Basic 2025");
 const status = ref("active");
@@ -42,8 +43,9 @@ onMounted(async () => {
 </script>
 
 <template>
+  <NavBar />
   <h2 class="text-center">{{ name }}</h2>
-  <h1 class="bg-blue-500 text-white p-5">Hello Tailwind CSS!</h1>
+  <h1 class="text-white p-5">Hello Tailwind CSS!</h1>
   <p v-if="status === active">User is {{ status }}</p>
   <p v-else-if="status === pending">User is {{ status }}</p>
   <p v-else>User is {{ status }}</p>
