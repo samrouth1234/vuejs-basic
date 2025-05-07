@@ -1,13 +1,13 @@
-VUE JS
+### VUE JS
 
-What is Vue JS ?
+### What is Vue JS ?
 
 - Progressive JS framework for buiding user interfaces & SPAs
 - Designed to be simple , flexible and incrementally adoptable
 - Used for projects of all sizes
 - Reactive data-binding & component-based architecture
 
-Prerequisites
+### Prerequisites
 
 - JavaScript Fundamentals (Loops , Functions , Object , etc )
 - Events & DOM Manipulation
@@ -15,14 +15,14 @@ Prerequisites
 - Arrow Function , High-Order Array Methods , Destructuring , etc
 - NPM (Node Package Manager)
 
-The Role of Frontend Frameworks
+### The Role of Frontend Frameworks
 
 - Enhanced UI/UX : Make it easy to create UIs that are dynamic and interactive
 - Organization : UI is broken into components with their own state and properites
 - Performance : Optimized for performance with features such as the virtual DOM
 - Modularity : Allow developers to break down their applications into smaller, reusable components.
 
-Why Vue ?
+### Why Vue ?
 
 - Simplicity & Approachability
 - Flexibility
@@ -30,7 +30,7 @@ Why Vue ?
 - Component-Based-Architecture
 - Active Community & Rich Ecosystem
 
-Vue Components
+### Vue Components
 
 - Reusable, self-contained pieces of code
 - Include the logic/JS , dynamic HTML output & scoped styling
@@ -55,18 +55,18 @@ Vue Components
 
 ```
 
-Getting Setup
+### Getting Setup
 
 - CDN - Include the script tag with the CDN URL
 - Vue CLI - Command line interface for setting up Vue project. This is no longer recommennded
 - Create Vue - Uses vite , which include features like hot-reloading , out of the box Typescript and an ecosystem of plugins
 - Nuxt.Js & Gridsome - SSR @ SSG frameworks that use Vue
 
-Resource Documentation
+### Resource Documentation
 
 - Vue JS : https://vuejs.org/guide/introduction.html
 
-How to setup project Vue.JS
+### How to setup project Vue.JS
 
 - Using CDN
 
@@ -112,19 +112,19 @@ How to setup project Vue.JS
 
 - Using CLI
 
-using with npm
+- using with npm
 
 ```bash
   npm create vue@latest
 ```
 
-using with pnpm
+- using with pnpm
 
 ```bash
   pnpm create vue@latest
 ```
 
-yarn
+- using with yarn
 
 ```bash
   # For yarn (V1+)
@@ -156,7 +156,7 @@ Done .
 
 ```
 
-Open the terminal
+### Open the terminal
 
 ```bash
   cd project-name
@@ -164,12 +164,12 @@ Open the terminal
   npm run dev # command using run project
 ```
 
-Recommentation Extension for VueJS
+### Recommentation Extension for VueJS
 
 - Vue - Official
 - Vue 3 Snippets
 
-Change Port VueJS
+### Change Port VueJS
 
 ```bash
   # vite.config.js
@@ -187,28 +187,28 @@ Change Port VueJS
 
 ```
 
-Lifecycle Methods
+### Lifecycle Methods
 
-- onBeforeMount : called before mounting begins
-- onMounted : called when component is mounted
-- onBeforeUpdate : called when reactive data changes and before re-render
-- onUpdated : called after re-render
-- onBeforeUnmount : called before the Vue instance is destroyed
-- onUnmounted : called after the instance is destroyed
-- onActivated : called when a kept-alive component is activated
-- onDeactivated : called when a kept-alive componenet is deactivated
-- onErrorCaptured : called when an error is captured from a chaild component
+- <code>onBeforeMount</code> : called before mounting begins
+- <code>onMounted</code> : called when component is mounted
+- <code>onBeforeUpdate</code> : called when reactive data changes and before re-render
+- <code>onUpdated</code> : called after re-render
+- <code>onBeforeUnmount</code> : called before the Vue instance is destroyed
+- <code>onUnmounted</code> : called after the instance is destroyed
+- <code>onActivated</code> : called when a kept-alive component is activated
+- <code>onDeactivated</code> : called when a kept-alive componenet is deactivated
+- <code>onErrorCaptured</code> : called when an error is captured from a chaild component
 
-Install Tailwind CSS 4 with Vite
+### Install Tailwind CSS 4 with Vite
 Next we’ll install TailwindCSS with it’s first party Vite plugin.
 
-- Use npm to install:
+### Use npm to install:
 
 ```bash
 npm install tailwindcss @tailwindcss/vite
 ```
 
-- Then register the plugin with Vite.
+### Then register the plugin with Vite.
 
 ```bash
 // vite.config.ts|js
