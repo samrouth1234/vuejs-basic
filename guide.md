@@ -240,3 +240,20 @@ export default defineConfig({
 /* /src/assets/main.css */
 @import "tailwindcss";
 ```
+
+### using define props in vue
+``` bash
+
+import { defineProps } from 'vue';
+
+defineProps({
+  title: {
+    type: String,
+    default: 'Become a Vue Dev'
+  }
+})
+
+<template>
+  <h2>{{title}}</h2>
+</template>
+```
