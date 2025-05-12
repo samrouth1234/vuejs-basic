@@ -1,12 +1,27 @@
 <script setup>
-import { defineProps } from "vue";
+import { computed, defineProps, ref } from "vue";
+import { RouterLink } from "vue-router";
 
-defineProps({
+const props = defineProps({
   job: {
     type: Object,
     required: true,
   },
 });
+
+const showDescription = ref(false);
+
+const truncateDescription = computed(() => {
+  const description = props.job.description;
+  if (!showDescription.value) {
+    return description.substring(0, 100) + "...";
+  }
+  return description;
+});
+
+const toggleDescription = () => {
+  showDescription.value = !showDescription.value;
+};
 </script>
 
 <template>
@@ -19,10 +34,13 @@ defineProps({
 
       <div class="mb-5">
         <div class="text-gray-800 mb-2">
-          {{ job.description }}
+          {{ truncateDescription }}
         </div>
-        <button class="text-green-500 hover:text-green-600 mb-5">
-          Read More
+        <button
+          @click="toggleDescription"
+          class="text-green-500 hover:text-green-600 mb-5"
+        >
+          {{ showDescription ? "Less" : "More" }}
         </button>
       </div>
 
@@ -34,12 +52,12 @@ defineProps({
           <i class="pi pi-map-marker text-orange-700"></i>
           {{ job.location }}
         </p>
-        <a
+        <RouterLink
           :to="'/jobs/' + job.id"
           class="h-[36px] bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg text-center text-sm"
         >
           Read More
-        </a>
+        </RouterLink>
       </div>
     </div>
   </div>

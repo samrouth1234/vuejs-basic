@@ -35,12 +35,12 @@ defineProps({
     </div>
 
     <section v-if="viewAllCards" class="flex justify-center pt-5">
-      <a
+      <RouterLink
         class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
-        href="/jobs"
+        to="/jobs"
       >
         View All Jobs
-      </a>
+      </RouterLink>
     </section>
   </section>
 </template>

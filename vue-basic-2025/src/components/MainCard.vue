@@ -8,12 +8,13 @@ import Card from "./Card.vue";
       <div>
         <h2 class="text-5xl font-semibold">For Developer</h2>
         <p class="py-3">Browse our Vue jobs and start your career today</p>
-        <button
+        <RouterLink
+          to="/jobs"
           class="bg-black text-white py-2 px-3 rounded hover:bg-gray-700"
           type="button"
         >
           Browse Jobs
-        </button>
+        </RouterLink>
       </div>
     </Card>
 
@@ -23,12 +24,13 @@ import Card from "./Card.vue";
         <p class="py-3">
           List your job and find the perfect developer for the role
         </p>
-        <button
+        <RouterLink
+          to="/jobs/add"
           class="bg-green-400 text-white py-2 px-3 rounded hover:bg-green-500"
           type="button"
         >
           Add Jobs
-        </button>
+        </RouterLink>
       </div>
     </Card>
   </div>
