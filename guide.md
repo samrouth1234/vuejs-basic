@@ -361,6 +361,10 @@ const isActive = (routeRath) => {
     </section>
   </nav>
 </template>
-
-
 ```
+### ref VS reactive
+- reactive() only takes objects. it does not take primitives like strings,numbers and booleans. it uses `ref()` under the hood
+- ref() can take object or primitives
+- ref() has a `.value` property for reasingnig `reactive()` doesn't use `.value` and can't be reassined 
+
+

@@ -1,10 +1,7 @@
 <script setup>
-import { computed, ref } from "vue";
-import JobData from "@/lib/jobs.json";
+import { onMounted, reactive } from "vue";
 import JobListing from "./JobListing.vue";
 import { defineProps } from "vue";
-
-const jobs = ref(JobData.jobs);
 
 defineProps({
   limit: {
@@ -17,6 +14,24 @@ defineProps({
   },
 });
 
+const state = reactive({
+  jobs: [],
+  isLoading: true,
+});
+
+onMounted(async () => {
+  try {
+    const respone = await fetch("http://localhost:3000/jobs");
+    if (!respone.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    state.jobs = await respone.json();
+  } catch (erorr) {
+    console.error("Error fetching data:", erorr);
+  } finally {
+    state.isLoading = false;
+  }
+});
 </script>
 
 <template>
@@ -27,7 +42,7 @@ defineProps({
       </h2>
       <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
         <JobListing
-          v-for="job in jobs.slice(0, limit || jobs.length)"
+          v-for="job in state.jobs.slice(0, limit || state.jobs.length)"
           :key="job.id"
           :job="job"
         />

@@ -21,6 +21,7 @@ const router = createRouter({
       path: "/jobs/:id",
       name: "job-details",
       component: JobDetails,
+      props: true,
     },
     {
       path: "/:pathMatch(.*)*",

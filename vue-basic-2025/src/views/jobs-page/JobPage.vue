@@ -1,10 +1,26 @@
 <script setup>
-import { ref } from "vue";
+import { onMounted, reactive } from "vue";
 
-import JobData from "@/lib/jobs.json";
 import JobListing from "@/components/JobListing.vue";
 
-const jobs = ref(JobData.jobs);
+const state = reactive({
+  jobs: [],
+  isLoading: true,
+});
+
+onMounted(async () => {
+  try {
+    const respone = await fetch("http://localhost:3000/jobs");
+    if (!respone.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    state.jobs = await respone.json();
+  } catch (erorr) {
+    console.error("Error fetching data:", erorr);
+  } finally {
+    state.isLoading = false;
+  }
+});
 </script>
 
 <template>
@@ -14,7 +30,7 @@ const jobs = ref(JobData.jobs);
         Browse Jobs
       </h2>
       <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <JobListing v-for="job in jobs" :key="job.id" :job="job" />
+        <JobListing v-for="job in state.jobs" :key="job.id" :job="job" />
       </div>
     </div>
   </section>
