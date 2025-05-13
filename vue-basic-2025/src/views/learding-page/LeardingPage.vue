@@ -10,5 +10,5 @@ import MainJob from "@/components/MainJob.vue";
     subtitle="An approachable, performant and versatile framework for building web user interfaces."
   />
   <MainCard />
-  <MainJob :limit="4" viewAllCards="true" />
+  <MainJob :limit="4"/>
 </template>

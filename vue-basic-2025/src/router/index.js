@@ -1,4 +1,6 @@
 import NotFound from "@/views/error-page/NotFound.vue";
+import AddJob from "@/views/jobs-page/AddJob.vue";
+import EditJob from "@/views/jobs-page/EditJob.vue";
 import JobDetails from "@/views/jobs-page/JobDetails.vue";
 import JobView from "@/views/jobs-page/JobPage.vue";
 import LeardingView from "@/views/learding-page/LeardingPage.vue";
@@ -22,6 +24,17 @@ const router = createRouter({
       name: "job-details",
       component: JobDetails,
       props: true,
+    },
+    {
+      path: "/jobs/edit/:id",
+      name: "edit-job",
+      component: EditJob,
+      props: true,
+    },
+    {
+      path: '/jobs/add',
+      name: 'add-job',
+      component: AddJob,
     },
     {
       path: "/:pathMatch(.*)*",

@@ -1,38 +1,93 @@
 <script setup>
+import axios from "axios";
 import { onMounted, reactive, defineProps } from "vue";
-import { RouterLink } from "vue-router";
+import { RouterLink, useRoute, useRouter } from "vue-router";
+import { toast } from "vue3-toastify";
+
+const route = useRoute();
+const router = useRouter();
+const jobId = route.params.id;
 
 const state = reactive({
   isLoading: true,
-  error: null,
-});
-
-const props = defineProps({
-  id: {
-    type: Number,
-    required: true,
-  },
+  jobs: [],
+  error: false,
 });
 
 // Log the id to debug
 // console.log("Received id:", props.id);
+// using async/await wiht fetch
+// const deletedJob = async () => {
+//   try {
+//     const deletdJob = await fetch(`http://localhost:3000/jobs/${jobId}`, {
+//       method: "DELETE",
+//     });
+//     if (deletdJob.ok) {
+//       toast.success("Job deleted successfully");
+//       router.push("/jobs");
+//     } else {
+//       toast.error("Failed to delete job");
+//     }
+//   } catch (error) {
+//     console.error("Error deleting job", error);
+//     toast.error("Job Not Deleted");
+//   }
+// };
+
+const deletedJob = async () => {
+  try {
+    const deletedJob = await axios.delete(
+      `http://localhost:3000/jobs/${jobId}`
+    );
+    if (!deletedJob) {
+      toast.error("Failed to delete job");
+      return;
+    }
+    toast.success("Job deleted successfully");
+    router.push("/jobs");
+  } catch (error) {
+    console.error("Error deleting job", error);
+    toast.error("Job Not Deleted");
+  }
+};
+
+// get the job by id using async/await with fetch
+// onMounted(async () => {
+//   if (!jobId) {
+//     state.error = "No job ID provided";
+//     state.isLoading = false;
+//     return;
+//   }
+
+//   try {
+//     const response = await fetch(`http://localhost:3000/jobs/${jobId}`);
+//     if (!response.ok) {
+//       throw new Error(`HTTP error! status: ${response.status}`);
+//     }
+//     state.jobs = await response.json();
+//   } catch (error) {
+//     console.error("Error fetching data:", error);
+//     state.error = error.message;
+//   } finally {
+//     state.isLoading = false;
+//   }
+// });
 
 onMounted(async () => {
-  if (!props.id) {
+  if (!jobId) {
     state.error = "No job ID provided";
     state.isLoading = false;
     return;
   }
-
   try {
-    const response = await fetch(`http://localhost:3000/jobs/${props.id}`);
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+    const response = await axios.get(`http://localhost:3000/jobs/${jobId}`);
+    if (response.status === 200) {
+      state.jobs = response.data;
+    } else {
+      toast.error("Failed to fetch job data");
     }
-    state.jobs = await response.json();
   } catch (error) {
     console.error("Error fetching data:", error);
-    state.error = error.message;
   } finally {
     state.isLoading = false;
   }
@@ -48,7 +103,7 @@ onMounted(async () => {
       </div>
       <div
         v-else-if="state.jobs"
-        class="grid grid-cols-1 md:grid-cols-[80%_20%] w-full gap-6"
+        class="grid grid-cols-1 md:grid-cols-[70%_30%] w-full gap-6"
       >
         <section>
           <section
@@ -68,7 +123,7 @@ onMounted(async () => {
             <h3 class="text-green-800 text-lg font-bold mb-6">
               Job Description
             </h3>
-            <p class="mb-4">{{ state.jobs.description }}</p>
+            <p class="mb-4 text-justify">{{ state.jobs.description }}</p>
             <h3 class="text-green-800 text-lg font-bold mb-2">Salary</h3>
             <p class="mb-4">{{ state.jobs.salary }}/ Year</p>
           </section>
@@ -77,30 +132,32 @@ onMounted(async () => {
         <aside>
           <div class="bg-white p-6 rounded-lg shadow-md">
             <h3 class="text-xl font-bold mb-6">Company Info</h3>
-            <h2 class="text-2xl">{{ state.jobs.company.name }}</h2>
+            <h2 class="text-2xl">{{ state.jobs.company[0].name }}</h2>
             <p class="my-2 text-justify">
-              {{ state.jobs.company.description }}
+              {{ state.jobs.company[0].description }}
             </p>
             <hr class="my-4" />
             <h3 class="text-xl">Contact Email:</h3>
             <p class="my-2 bg-green-100 p-2 font-bold">
-              {{ state.jobs.company.contactEmail }}
+              {{ state.jobs.company[0].contactEmail }}
             </p>
             <h3 class="text-xl">Contact Phone:</h3>
             <p class="my-2 bg-green-100 p-2 font-bold">
-              {{ state.jobs.company.contactPhone }}
+              {{ state.jobs.company[0].contactPhone }}
             </p>
           </div>
 
           <div class="bg-white p-6 rounded-lg shadow-md mt-6">
             <h3 class="text-xl font-bold mb-6">Manage Job</h3>
             <RouterLink
-              :to="`/edit-job/${props.id}`"
+              :to="`/jobs/edit/${state.jobs.id}`"
               class="bg-green-500 hover:bg-green-600 text-white text-center font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline mt-4 block"
             >
               Edit Job
             </RouterLink>
             <button
+              @click="deletedJob"
+              type="button"
               class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline mt-4 block"
             >
               Delete Job
